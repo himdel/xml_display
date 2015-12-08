@@ -22,13 +22,6 @@ function LoadXMLDom(ParentElementID,xmlDoc)
 		while (xmlHolderElement.childNodes.length) { xmlHolderElement.removeChild(xmlHolderElement.childNodes.item(xmlHolderElement.childNodes.length-1));	}
 		var Result = ShowXML(xmlHolderElement,xmlDoc.documentElement,0);
 		
-		var ReferenceElement = document.createElement('div');
-		var Link = document.createElement('a');		
-		Link.setAttribute('href','http://www.levmuchnik.net/Content/ProgrammingTips/WEB/XMLDisplay/DisplayXMLFileWithJavascript.html');
-		var TextNode = document.createTextNode('Source: Lev Muchnik');
-		Link.appendChild(TextNode);
-
-		xmlHolderElement.appendChild(Link);
 		return Result;
 	}
 	else { return false; }
