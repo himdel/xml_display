@@ -105,23 +105,7 @@ function ShowXML(xmlHolderElement,RootNode,indent)
 	TagEmptyElement.className = 'Element';
 	TagEmptyElement.style.position = 'relative';
 	TagEmptyElement.style.left = NestingIndent+'px';
-	if (RootNode.childNodes.length==0) { 
-    var ClickableElement = AddTextNode(TagEmptyElement,'','Clickable') ;
-    ClickableElement.id = 'div_empty_' + IDCounter;	  
-    AddTextNode(TagEmptyElement,'<','Utility') ;
-    AddTextNode(TagEmptyElement,RootNode.nodeName ,'NodeName') 
-    for (var i = 0; RootNode.attributes && i < RootNode.attributes.length; ++i) {
-      CurrentAttribute  = RootNode.attributes.item(i);
-      AddTextNode(TagEmptyElement,' ' + CurrentAttribute.nodeName ,'AttributeName') ;
-      AddTextNode(TagEmptyElement,'=','Utility') ;
-      AddTextNode(TagEmptyElement,'"' + CurrentAttribute.nodeValue + '"','AttributeValue') ;
-    }
-    AddTextNode(TagEmptyElement,' />') ;
-    xmlHolderElement.appendChild(TagEmptyElement);	
-    //SetVisibility(TagEmptyElement,true);    
-	}
-	else { // mo child nodes
-    
+
     var ClickableElement = AddTextNode(TagEmptyElement,'+','Clickable') ;
     ClickableElement.onclick  = function() {ToggleElementVisibility(this); }
     ClickableElement.id = 'div_empty_' + IDCounter;	
@@ -183,10 +167,8 @@ function ShowXML(xmlHolderElement,RootNode,indent)
     AddTextNode(TagElement,'  </','Utility') ;
     AddTextNode(TagElement,RootNode.nodeName,'NodeName') ;
     AddTextNode(TagElement,'>','Utility') ;
-    xmlHolderElement.appendChild(TagElement);	
-  }
-	
-	// if (indent==0) { ToggleElementVisibility(TagElement.childNodes(0)); } - uncomment to collapse the external element
+    xmlHolderElement.appendChild(TagElement);
+
 	return Result;
 }
 function AddTextNode(ParentNode,Text,Class) 
