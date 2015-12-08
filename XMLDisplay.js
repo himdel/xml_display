@@ -1,14 +1,3 @@
-/* Copyright (c) 2007 Lev Muchnik <LevMuchnik@gmail.com>. All rights reserved.
- * You may copy and modify this script as long as the above copyright notice,
- * this condition and the following disclaimer is left intact.
- * This software is provided by the author "AS IS" and no warranties are
- * implied, including fitness for a particular purpose. In no event shall
- * the author be liable for any damages arising in any way out of the use
- * of this software, even if advised of the possibility of such damage.
- * $Date: 2007-10-03 19:08:15 -0700 (Wed, 03 Oct 2007) $
-*/
-
-
 // public
 
 function LoadXML(ParentElementID, URL) {
