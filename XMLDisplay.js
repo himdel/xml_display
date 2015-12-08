@@ -12,7 +12,6 @@ function LoadXML(ParentElementID,URL)
 {
 		var xmlHolderElement = GetParentElement(ParentElementID);
 		if (xmlHolderElement==null) { return false; }
-		ToggleElementVisibility(xmlHolderElement);
 		return RequestURL(URL,URLReceiveCallback,ParentElementID);
 }
 function LoadXMLDom(ParentElementID,xmlDoc) 
