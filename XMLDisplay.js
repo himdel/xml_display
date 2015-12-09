@@ -1,12 +1,9 @@
 // public
 
-function LoadXML(ParentElementID, URL) {
-  var xmlHolderElement = GetParentElement(ParentElementID);
-  if (xmlHolderElement == null) {
-    return false;
-  }
-
-  return RequestURL(URL, URLReceiveCallback, ParentElementID);
+function LoadXMLUrl(ParentElementID, url) {
+  $.get(url, function(xmlString) {
+    LoadXMLString(ParentElementID, xmlString);
+  }, "xml");
 }
 
 function LoadXMLDom(ParentElementID, xmlDoc) {
