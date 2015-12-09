@@ -27,7 +27,7 @@ function LoadXMLDom(ParentElementID, xmlDoc) {
 if ($) {
   $.fn.xmlDisplay = function(xmlString) {
     this.each(function(_i, element) {
-      var $e = element;
+      var $e = $(element);
       var id = $e.attr("id");
 
       if (! id) {
