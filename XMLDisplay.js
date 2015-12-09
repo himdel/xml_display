@@ -24,6 +24,22 @@ function LoadXMLDom(ParentElementID, xmlDoc) {
   return ShowXML(xmlHolderElement, xmlDoc.documentElement, 0);
 }
 
+if ($) {
+  $.fn.xmlDisplay = function(xmlString) {
+    this.each(function(_i, element) {
+      var $e = element;
+      var id = $e.attr("id");
+
+      if (! id) {
+        // ensure the element has an ID
+        id = "xmlDisplay-" + Math.random();
+        $e.attr("id", id);
+      }
+
+      LoadXMLString(id, xmlString);
+    });
+  };
+}
 
 // private
 
