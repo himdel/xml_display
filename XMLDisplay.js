@@ -4,6 +4,13 @@ function LoadXMLUrl(ParentElementID, url) {
   $.get(url, function(xmlString) {
     LoadXMLString(ParentElementID, xmlString);
   }, "xml");
+
+  return true;
+}
+
+function LoadXMLString(ParentElementID, xmlString) {
+  var xmlDoc = CreateXMLDOM(xmlString);
+  return LoadXMLDom(ParentElementID, xmlDoc);
 }
 
 function LoadXMLDom(ParentElementID, xmlDoc) {
@@ -24,10 +31,6 @@ function LoadXMLDom(ParentElementID, xmlDoc) {
   }
 }
 
-function LoadXMLString(ParentElementID, XMLString) {
-  var xmlDoc = CreateXMLDOM(XMLString);
-  return LoadXMLDom(ParentElementID, xmlDoc);
-}
 
 
 // private
