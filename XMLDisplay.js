@@ -14,23 +14,15 @@ function LoadXMLString(ParentElementID, xmlString) {
 }
 
 function LoadXMLDom(ParentElementID, xmlDoc) {
-  if (xmlDoc) {
-    var xmlHolderElement = document.getElementById(ParentElementID);
-    if (xmlHolderElement == null) {
-      return false;
-    }
-
-    while (xmlHolderElement.childNodes.length) {
-      xmlHolderElement.removeChild(xmlHolderElement.childNodes.item(xmlHolderElement.childNodes.length - 1));
-    }
-
-    var Result = ShowXML(xmlHolderElement, xmlDoc.documentElement, 0);
-    return Result;
-  } else {
+  var xmlHolderElement = document.getElementById(ParentElementID);
+  if (! xmlHolderElement || ! xmlDoc) {
     return false;
   }
-}
 
+  xmlHolderElement.innerHTML = "";
+
+  return ShowXML(xmlHolderElement, xmlDoc.documentElement, 0);
+}
 
 
 // private
