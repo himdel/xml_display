@@ -206,25 +206,6 @@ function AddTextNode(ParentNode, Text, Class) {
   return NewNode;
 }
 
-function CompatibleGetElementByID(id) {
-  if (!id) {
-    return null;
-  }
-
-  if (document.getElementById) {
-    // DOM3 = IE5, NS6
-    return document.getElementById(id);
-  } else {
-    if (document.layers) {
-      // Netscape 4
-      return document.id;
-    } else {
-      // IE 4
-      return document.all.id;
-    }
-  }
-}
-
 function SetVisibility(HTMLElement, Visible) {
   if (!HTMLElement) {
     return;
@@ -267,8 +248,9 @@ function ToggleElementVisibility(Element) {
     ElementToHide = "div_empty_" + ElementID;
   }
 
-  ElementToHide = CompatibleGetElementByID(ElementToHide);
-  ElementToShow = CompatibleGetElementByID(ElementToShow);
+  ElementToHide = document.getElementById(ElementToHide);
+  ElementToShow = document.getElementById(ElementToShow);
+
   if (ElementToHide) {
     ElementToHide = ElementToHide.parentNode;
   }
