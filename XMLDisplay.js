@@ -42,57 +42,6 @@ function GetParentElement(ParentElementID) {
   }
 }
 
-function URLReceiveCallback(httpRequest, xmlHolderElement) {
-  try {
-    if (httpRequest.readyState == 4) {
-      if (httpRequest.status == 200) {
-        var xmlDoc = httpRequest.responseXML;
-        if (xmlHolderElement && xmlHolderElement != null) {
-          xmlHolderElement.innerHTML = "";
-          return LoadXMLDom(xmlHolderElement, xmlDoc);
-        }
-      } else {
-        return false;
-      }
-    }
-  } catch(e) {
-    return false;
-  }
-}
-
-// based on: http://developer.mozilla.org/en/docs/AJAX:Getting_Started
-function RequestURL(url, callback, ExtraData) {
-  var httpRequest;
-  if (window.XMLHttpRequest) {
-    // Mozilla, Safari, ...
-    httpRequest = new XMLHttpRequest();
-    if (httpRequest.overrideMimeType) {
-      httpRequest.overrideMimeType("text/xml");
-    }
-  } else if (window.ActiveXObject) {
-    // IE
-    try {
-      httpRequest = new ActiveXObject("Msxml2.XMLHTTP");
-    } catch (e) {
-      try {
-        httpRequest = new ActiveXObject("Microsoft.XMLHTTP");
-      } catch (e) {}
-    }
-  }
-
-  if (!httpRequest) {
-    return false;
-  }
-
-  httpRequest.onreadystatechange = function() {
-    callback(httpRequest, ExtraData);
-  };
-
-  httpRequest.open("GET", url, true);
-  httpRequest.send("");
-  return true;
-}
-
 function CreateXMLDOM(XMLStr) {
   if (window.ActiveXObject) {
     var xmlDoc = new ActiveXObject("Microsoft.XMLDOM");
