@@ -27,14 +27,15 @@ function LoadXMLDom(ParentElementID, xmlDoc) {
 
 // private
 
-function CreateXMLDOM(XMLStr) {
+function CreateXMLDOM(xmlString) {
   if (window.ActiveXObject) {
+    // IE9 has DOMParser but not .parseFromString
     var xmlDoc = new ActiveXObject("Microsoft.XMLDOM");
-    xmlDoc.loadXML(XMLStr);
+    xmlDoc.loadXML(xmlString);
     return xmlDoc;
   } else if (document.implementation && document.implementation.createDocument) {
     var parser = new DOMParser();
-    return parser.parseFromString(XMLStr, "text/xml");
+    return parser.parseFromString(xmlString, "text/xml");
   } else {
     return null;
   }
@@ -42,8 +43,8 @@ function CreateXMLDOM(XMLStr) {
 
 var IDCounter = 1;
 var NestingIndent = 15;
-function ShowXML(xmlHolderElement, RootNode, indent) {
-  if (RootNode == null || xmlHolderElement == null) {
+function ShowXML(xmlHolderElement, rootNode, indent) {
+  if (rootNode == null || xmlHolderElement == null) {
     return false;
   }
 
@@ -60,16 +61,16 @@ function ShowXML(xmlHolderElement, RootNode, indent) {
   ClickableElement.id = "div_empty_" + IDCounter;
 
   AddTextNode(TagEmptyElement, "<", "Utility");
-  AddTextNode(TagEmptyElement, RootNode.nodeName , "NodeName");
-  for (var i = 0; RootNode.attributes && i < RootNode.attributes.length; ++i) {
-    var CurrentAttribute = RootNode.attributes.item(i);
+  AddTextNode(TagEmptyElement, rootNode.nodeName , "NodeName");
+  for (var i = 0; rootNode.attributes && i < rootNode.attributes.length; ++i) {
+    var CurrentAttribute = rootNode.attributes.item(i);
     AddTextNode(TagEmptyElement, " " + CurrentAttribute.nodeName , "AttributeName");
     AddTextNode(TagEmptyElement, "=", "Utility");
     AddTextNode(TagEmptyElement, "\"" + CurrentAttribute.nodeValue + "\"", "AttributeValue");
   }
 
   AddTextNode(TagEmptyElement, "> </", "Utility");
-  AddTextNode(TagEmptyElement, RootNode.nodeName, "NodeName");
+  AddTextNode(TagEmptyElement, rootNode.nodeName, "NodeName");
   AddTextNode(TagEmptyElement, ">", "Utility");
   xmlHolderElement.appendChild(TagEmptyElement);
   $(TagEmptyElement).hide();
@@ -85,10 +86,10 @@ function ShowXML(xmlHolderElement, RootNode, indent) {
   ClickableElement.id = "div_content_" + IDCounter;
   ++IDCounter;
   AddTextNode(TagElement, "<", "Utility");
-  AddTextNode(TagElement, RootNode.nodeName , "NodeName");
+  AddTextNode(TagElement, rootNode.nodeName , "NodeName");
 
-  for (var i = 0; RootNode.attributes && i < RootNode.attributes.length; ++i) {
-    var CurrentAttribute = RootNode.attributes.item(i);
+  for (var i = 0; rootNode.attributes && i < rootNode.attributes.length; ++i) {
+    var CurrentAttribute = rootNode.attributes.item(i);
     AddTextNode(TagElement, " " + CurrentAttribute.nodeName , "AttributeName");
     AddTextNode(TagElement, "=", "Utility");
     AddTextNode(TagElement, "\"" + CurrentAttribute.nodeValue + "\"", "AttributeValue");
@@ -96,15 +97,15 @@ function ShowXML(xmlHolderElement, RootNode, indent) {
   AddTextNode(TagElement, ">", "Utility");
   TagElement.appendChild(document.createElement("br"));
   var NodeContent = null;
-  for (var i = 0; RootNode.childNodes && i < RootNode.childNodes.length; ++i) {
-    if (RootNode.childNodes.item(i).nodeName != "#text") {
-      Result &= ShowXML(TagElement, RootNode.childNodes.item(i), indent + 1);
+  for (var i = 0; rootNode.childNodes && i < rootNode.childNodes.length; ++i) {
+    if (rootNode.childNodes.item(i).nodeName != "#text") {
+      Result &= ShowXML(TagElement, rootNode.childNodes.item(i), indent + 1);
     } else {
-      NodeContent = RootNode.childNodes.item(i).nodeValue;
+      NodeContent = rootNode.childNodes.item(i).nodeValue;
     }
   }
-  if (RootNode.nodeValue) {
-    NodeContent = RootNode.nodeValue;
+  if (rootNode.nodeValue) {
+    NodeContent = rootNode.nodeValue;
   }
   if (NodeContent) {
     var ContentElement = document.createElement("div");
@@ -114,7 +115,7 @@ function ShowXML(xmlHolderElement, RootNode, indent) {
     TagElement.appendChild(ContentElement);
   }
   AddTextNode(TagElement, " </", "Utility");
-  AddTextNode(TagElement, RootNode.nodeName, "NodeName");
+  AddTextNode(TagElement, rootNode.nodeName, "NodeName");
   AddTextNode(TagElement, ">", "Utility");
   xmlHolderElement.appendChild(TagElement);
 
