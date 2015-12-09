@@ -141,7 +141,7 @@ function ShowXML(xmlHolderElement, RootNode, indent) {
   AddTextNode(TagEmptyElement, RootNode.nodeName, "NodeName");
   AddTextNode(TagEmptyElement, ">", "Utility");
   xmlHolderElement.appendChild(TagEmptyElement);
-  SetVisibility(TagEmptyElement, false);
+  $(TagEmptyElement).hide();
 
   var TagElement = document.createElement("div");
   TagElement.className = "Element";
@@ -206,26 +206,6 @@ function AddTextNode(ParentNode, Text, Class) {
   return NewNode;
 }
 
-function SetVisibility(HTMLElement, Visible) {
-  if (!HTMLElement) {
-    return;
-  }
-
-  var VisibilityStr = (Visible) ? "block" : "none";
-  if (document.getElementById) {
-    // DOM3 = IE5, NS6
-    HTMLElement.style.display = VisibilityStr;
-  } else {
-    if (document.layers) {
-      // Netscape 4
-      HTMLElement.display = VisibilityStr;
-    } else {
-      // IE 4
-      HTMLElement.id.style.display = VisibilityStr;
-    }
-  }
-}
-
 function ToggleElementVisibility(Element) {
   if (!Element|| !Element.id) {
     return;
@@ -258,6 +238,6 @@ function ToggleElementVisibility(Element) {
     ElementToShow = ElementToShow.parentNode;
   }
 
-  SetVisibility(ElementToHide, false);
-  SetVisibility(ElementToShow, true);
+  $(ElementToHide).hide();
+  $(ElementToShow).show();
 }
