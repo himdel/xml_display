@@ -27,7 +27,6 @@
   border-left-width: thin;
   border-left-style: solid;
   padding-top: 0px;
-  margin-top: 10px;
 }
 
 .Clickable {
@@ -35,5 +34,4 @@
   font-size: large;
   color: #800080;
   cursor: pointer;
-  vertical-align: middle;
 }
