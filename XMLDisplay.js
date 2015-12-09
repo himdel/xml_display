@@ -8,7 +8,7 @@ function LoadXMLUrl(ParentElementID, url) {
 
 function LoadXMLDom(ParentElementID, xmlDoc) {
   if (xmlDoc) {
-    var xmlHolderElement = GetParentElement(ParentElementID);
+    var xmlHolderElement = document.getElementById(ParentElementID);
     if (xmlHolderElement == null) {
       return false;
     }
@@ -31,16 +31,6 @@ function LoadXMLString(ParentElementID, XMLString) {
 
 
 // private
-
-function GetParentElement(ParentElementID) {
-  if (typeof(ParentElementID) == "string") {
-    return document.getElementById(ParentElementID);
-  } else if (typeof(ParentElementID) == "object") {
-    return ParentElementID;
-  } else {
-    return null;
-  }
-}
 
 function CreateXMLDOM(XMLStr) {
   if (window.ActiveXObject) {
